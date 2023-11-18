@@ -1,15 +1,9 @@
-name: "Terraform Lint & Plan"
-on:
-  push:
-    branches:    
-      - '**'
-  pr:
-    branches:    
-      - '**'
+name: "Module Test"
+on: [push, pull_request]
 
 jobs:
   terraform-plan:
-    name: "terraform plan"
+    name: "Terraform Lint and Apply"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -110,3 +104,8 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+
+      - name: Terraform Apply
+        id: plan
+        run: terraform apply -no-color
+        continue-on-error: true
