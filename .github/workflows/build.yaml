@@ -22,6 +22,8 @@ jobs:
 
       - uses: terraform-docs/gh-actions@v1.0.0
 
+      - uses: dflook/terraform-fmt@v1
+
       - uses: bridgecrewio/checkov-action@v12
 
       - uses: terraform-linters/setup-tflint@v3
