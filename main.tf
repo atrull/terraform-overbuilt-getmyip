@@ -1,8 +1,12 @@
 terraform {
+  required_version = "~> 1.0"
   required_providers {
     curl = {
       version = "~> 1.0.2"
       source  = "anschoewe/curl"
+    }
+    http = {
+      version = "~> 3"
     }
   }
 }
@@ -43,28 +47,16 @@ locals {
   ]
 
   # what follows is a really long winded version of uniq -c | sort -n
-  ipv4_index_list    = [for index, item in local.ipv4_matches : length([for i in slice(local.ipv4_matches, 0, index + 1) : i if i == item])]
-  ipv4_joined_index  = zipmap(local.ipv4_matches, local.ipv4_index_list)
-  ipv4_reverse_index = { for k, v in local.ipv4_joined_index : v => k... }
-  ipv4_most_common_response = local.ipv4_reverse_index != {} ? lookup(
-    local.ipv4_reverse_index,
-    element(
-      sort(keys(local.ipv4_reverse_index)),
-      length(local.ipv4_reverse_index) - 1
-    )
-  ) : []
+  ipv4_index_list           = [for index, item in local.ipv4_matches : length([for i in slice(local.ipv4_matches, 0, index + 1) : i if i == item])]
+  ipv4_joined_index         = zipmap(local.ipv4_matches, local.ipv4_index_list)
+  ipv4_reverse_index        = { for k, v in local.ipv4_joined_index : v => k... }
+  ipv4_most_common_response = local.ipv4_reverse_index != {} ? local.ipv4_reverse_index[element(sort(keys(local.ipv4_reverse_index)), length(local.ipv4_reverse_index) - 1)] : []
 
   # uniq -c | sort -n again but for ipv6
-  ipv6_index_list    = [for index, item in local.ipv6_matches : length([for i in slice(local.ipv6_matches, 0, index + 1) : i if i == item])]
-  ipv6_joined_index  = zipmap(local.ipv6_matches, local.ipv6_index_list)
-  ipv6_reverse_index = { for k, v in local.ipv6_joined_index : v => k... }
-  ipv6_most_common_response = local.ipv6_reverse_index != {} ? lookup(
-    local.ipv6_reverse_index,
-    element(
-      sort(keys(local.ipv6_reverse_index)),
-      length(local.ipv6_reverse_index) - 1
-    )
-  ) : []
+  ipv6_index_list           = [for index, item in local.ipv6_matches : length([for i in slice(local.ipv6_matches, 0, index + 1) : i if i == item])]
+  ipv6_joined_index         = zipmap(local.ipv6_matches, local.ipv6_index_list)
+  ipv6_reverse_index        = { for k, v in local.ipv6_joined_index : v => k... }
+  ipv6_most_common_response = local.ipv6_reverse_index != {} ? local.ipv6_reverse_index[element(sort(keys(local.ipv6_reverse_index)), length(local.ipv6_reverse_index) - 1)] : []
 
 }
 

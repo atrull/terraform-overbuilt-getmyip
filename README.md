@@ -11,7 +11,9 @@ We support two providers - `curl` and `http`. `curl` is the default provider bec
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
 | <a name="requirement_curl"></a> [curl](#requirement\_curl) | ~> 1.0.2 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3 |
 
 ## Providers
 
@@ -36,8 +38,8 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_data_provider"></a> [data\_provider](#input\_data\_provider) | `curl` or `http` providers are both supported - we recommend `curl` | `string` | `"curl"` | no |
-| <a name="input_extra_service_urls"></a> [extra\_service\_urls](#input\_extra\_service\_urls) | Put your own in here if you want extra ones, this gets merged with the `service_urls` list | `list` | `[]` | no |
-| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list` | <pre>[<br>  "https://api.seeip.org",<br>  "https://ipinfo.io/ip",<br>  "https://ifconfig.co",<br>  "https://icanhazip.com",<br>  "https://api.ipify.org",<br>  "https://ifconfig.me",<br>  "https://ipecho.net/plain",<br>  "https://ifconfig.io",<br>  "http://eth0.me/",<br>  "https://ident.me",<br>  "https://ipv4.ident.me"<br>]</pre> | no |
+| <a name="input_extra_service_urls"></a> [extra\_service\_urls](#input\_extra\_service\_urls) | Put your own in here if you want extra ones, this gets merged with the `service_urls` list | `list(string)` | `[]` | no |
+| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list(string)` | <pre>[<br>  "https://api.seeip.org",<br>  "https://ipinfo.io/ip",<br>  "https://ifconfig.co",<br>  "https://icanhazip.com",<br>  "https://api.ipify.org",<br>  "https://ifconfig.me",<br>  "https://ipecho.net/plain",<br>  "https://ifconfig.io",<br>  "http://eth0.me/",<br>  "https://ident.me",<br>  "https://ipv4.ident.me"<br>]</pre> | no |
 
 ## Outputs
 
