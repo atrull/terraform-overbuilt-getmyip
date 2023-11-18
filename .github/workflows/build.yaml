@@ -20,8 +20,6 @@ jobs:
 
       - uses: terraform-docs/gh-actions@v1.0.0
 
-      - uses: bridgecrewio/checkov-action@v12
-
       - uses: terraform-linters/setup-tflint@v3
 
       - name: Terraform Fmt
@@ -39,3 +37,5 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color 2>&1
+
+      - uses: bridgecrewio/checkov-action@v12
