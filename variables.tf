@@ -8,7 +8,6 @@ variable "service_urls" {
     "https://ifconfig.me",
     "https://ipecho.net/plain",
     "https://ifconfig.io",
-    "http://eth0.me/",
     "https://ident.me",
     "https://ipv4.ident.me",
   ]
