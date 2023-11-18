@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   terraform-plan:
-    name: "Terraform Lint and Apply"
+    name: "Terraform Lint and Plan"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -104,4 +104,3 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-        
