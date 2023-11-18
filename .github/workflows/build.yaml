@@ -106,6 +106,6 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        id: plan
+        id: apply
         run: terraform apply -no-color
         continue-on-error: true
