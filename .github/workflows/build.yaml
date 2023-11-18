@@ -17,15 +17,12 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.4
 
       - uses: terraform-docs/gh-actions@v1.0.0
 
       - uses: bridgecrewio/checkov-action@v12
 
       - uses: terraform-linters/setup-tflint@v3
-
 
       - name: Terraform Fmt
         id: fmt
