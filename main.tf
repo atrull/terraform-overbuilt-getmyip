@@ -7,6 +7,7 @@ terraform {
     }
     http = {
       version = "~> 3"
+      source  = "hashicorp/http"
     }
   }
 }
