@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     curl = {
-      version = "1.0.2"
+      version = "~> 1.0.2"
       source  = "anschoewe/curl"
     }
   }
@@ -9,20 +9,22 @@ terraform {
 
 # curl is the default method
 data "curl" "myip" {
-  for_each    = var.data_provider == "curl" ? toset(var.myip_service_urls) : []
+  for_each    = var.data_provider == "curl" ? toset(local.service_urls) : []
   http_method = "GET"
   uri         = each.key
 }
 
 # but we can use http if you prefer
 data "http" "myip" {
-  for_each           = var.data_provider == "http" ? toset(var.myip_service_urls) : []
+  for_each           = var.data_provider == "http" ? toset(local.service_urls) : []
   url                = each.key
   method             = "GET"
   request_timeout_ms = 500
 }
 
 locals {
+  # merge extra with primary list and make sure entries are unique
+  service_urls = distinct(concat(var.service_urls, var.extra_service_urls))
 
   # build a list of responses
   service_response_bodies = var.data_provider == "curl" ? values(data.curl.myip)[*].response : values(data.http.myip)[*].response_body
@@ -66,4 +68,4 @@ locals {
 
 }
 
-# See outputs.tf for where we spit out the winners
+# See outputs.tf where we spit out the winners
