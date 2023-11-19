@@ -1,10 +1,14 @@
 # Overbuilt myip module
 
-## What it does:
+## What it does
 
 This module polls a series of fairly well known but occasionally unreliable 'what is my ip' services. It then produces the most common response that is a valid ipv4 or ipv6 address (both outputs are separately provided).
 
 We support two providers - `curl` and `http`. `curl` is the default provider because it has better failure handling whereas `http` provider will fail a plan/apply if the endpoint doesn't respond.
+
+## Limitations
+
+Neither the `curl` nor `http` providers are perfect. The `curl` provider is slightly more reliable than the `http` provider, but `curl` is missing a timeout option (for now).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -39,14 +43,30 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_data_provider"></a> [data\_provider](#input\_data\_provider) | `curl` or `http` providers are both supported - we recommend `curl` | `string` | `"curl"` | no |
 | <a name="input_extra_service_urls"></a> [extra\_service\_urls](#input\_extra\_service\_urls) | Put your own in here if you want extra ones, this gets merged with the `service_urls` list | `list(string)` | `[]` | no |
-| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list(string)` | <pre>[<br>  "https://api.seeip.org",<br>  "https://ipinfo.io/ip",<br>  "https://ifconfig.co",<br>  "https://icanhazip.com",<br>  "https://api.ipify.org",<br>  "https://ifconfig.me",<br>  "https://ipecho.net/plain",<br>  "https://ifconfig.io",<br>  "http://eth0.me/",<br>  "https://ident.me",<br>  "https://ipv4.ident.me"<br>]</pre> | no |
+| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list(string)` | <pre>[<br>  "https://api.seeip.org",<br>  "https://ipinfo.io/ip",<br>  "https://ifconfig.co",<br>  "https://icanhazip.com",<br>  "https://api.ipify.org",<br>  "https://ifconfig.me",<br>  "https://ipecho.net/plain",<br>  "https://ifconfig.io",<br>  "https://ident.me",<br>  "https://ipv4.ident.me"<br>]</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ipv4"></a> [ipv4](#output\_ipv4) | n/a |
-| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | n/a |
-| <a name="output_ipv6"></a> [ipv6](#output\_ipv6) | n/a |
-| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | n/a |
+| <a name="output_ipv4"></a> [ipv4](#output\_ipv4) | The most common ipv4 myip response |
+| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | List of all the ipv4 matches (informational) |
+| <a name="output_ipv6"></a> [ipv6](#output\_ipv6) | The most common ipv6 myip response |
+| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | List of all the ipv6 matches (informational) |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Authors
+
+Alex Trull (firstname@lastname.org)
+
+## License
+
+BSD-3
+
+## Inspiration
+
+The failed builds because the myip service I had chosen wasn't working or there was a routing error in the pipeline. I owe it all to you!
+
+## Additional information for users from all ip addresses
+
+* I am very fond of you all.
