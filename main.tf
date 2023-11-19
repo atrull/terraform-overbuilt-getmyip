@@ -54,6 +54,7 @@ locals {
   # merge extra with primary list and make sure entries are unique
   service_urls = distinct(concat(var.service_urls, var.extra_service_urls))
 
+  # pick whichever responses we based on the chosen data_provider option
   external_curl_responses = var.data_provider == "external_curl" ? values(data.external.external_curl)[*].result.body : []
   curl2_responses         = var.data_provider == "curl2" ? values(data.curl2.myip)[*].response.body : []
   http_responses          = var.data_provider == "http" ? values(data.http.myip)[*].response_body : []
