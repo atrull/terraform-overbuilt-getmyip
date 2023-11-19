@@ -49,10 +49,10 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ipv4"></a> [ipv4](#output\_ipv4) | The most common ipv4 myip response |
-| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | List of all the ipv4 matches (informational) |
-| <a name="output_ipv6"></a> [ipv6](#output\_ipv6) | The most common ipv6 myip response |
-| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | List of all the ipv6 matches (informational) |
+| <a name="output_ipv4"></a> [ipv4](#output\_ipv4) | The most common ipv4 response |
+| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | List of all the ipv4 matches (informational/testing) |
+| <a name="output_ipv6"></a> [ipv6](#output\_ipv6) | The most common ipv6 response |
+| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | List of all the ipv6 matches (informational/testing) |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
