@@ -28,13 +28,13 @@ variable "request_timeout" {
 }
 
 variable "retry_attempts" {
-  default     = 0
+  default     = 1
   type        = number
   description = "Request retries"
 }
 
 variable "data_provider" {
-  default     = "curl2"
+  default     = "external_curl"
   type        = string
-  description = "`curl2` or `http` providers are both supported - we recommend `curl2`"
+  description = "`curl2` or `http` providers are also supported - we recommend `external_curl` because it handles failure better"
 }

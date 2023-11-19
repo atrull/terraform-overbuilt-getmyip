@@ -1,6 +1,10 @@
 terraform {
   required_version = "~> 1.0"
   required_providers {
+    external = {
+      version = "~> 2.3.1"
+      source  = "hashicorp/external"
+    }
     curl2 = {
       version = "~> 1.6"
       source  = "mehulgohil/curl2"
@@ -19,12 +23,13 @@ provider "curl2" {
   }
 }
 
-# dns checks
-data "dns_a_record_set" "myip" {
-  for_each = toset(local.service_urls)
-  host = regex("^(?:(?P<scheme>[^:/?#]+):)?(?://(?P<host>[^/?#]*))?", each.key).host
-  # one day, this will be more reliable when a PR for the DNS provider gets merged in..
-  # https://github.com/hashicorp/terraform-provider-dns/pull/76
+# this is the most reliable option due to the fact we can fake response for a broken service url
+data "external" "external_curl" {
+  for_each = var.data_provider == "external_curl" ? toset(local.service_urls) : []
+  program  = ["/bin/sh", "${path.module}/external_curl.sh", each.key, var.retry_attempts, var.request_timeout / 1000]
+  query = {
+    id = ""
+  }
 }
 
 # curl2 is the default method
@@ -32,13 +37,6 @@ data "curl2" "myip" {
   for_each    = var.data_provider == "curl2" ? toset(local.service_urls) : []
   uri         = each.key
   http_method = "GET"
-  lifecycle {
-    # check dns first
-    precondition {
-      condition     = data.dns_a_record_set.myip[each.key].addrs != null
-      error_message = "dns for a myip service didn't resolve please remove it from the list"
-    }
-  }
 }
 
 # but we can use http if you prefer
@@ -56,8 +54,12 @@ locals {
   # merge extra with primary list and make sure entries are unique
   service_urls = distinct(concat(var.service_urls, var.extra_service_urls))
 
+  external_curl_responses = var.data_provider == "external_curl" ? values(data.external.external_curl)[*].result.body : []
+  curl2_responses         = var.data_provider == "curl2" ? values(data.curl2.myip)[*].response.body : []
+  http_responses          = var.data_provider == "http" ? values(data.http.myip)[*].response_body : []
+
   # build a list of responses
-  service_response_bodies = var.data_provider == "curl2" ? values(data.curl2.myip)[*].response.body : values(data.http.myip)[*].response_body
+  service_response_bodies = coalesce(local.external_curl_responses, local.curl2_responses, local.http_responses)
 
   # remunge it without whitespace as a list of strings
   split_output = split(",", replace(trimspace(join(",", local.service_response_bodies)), "/\\s/", ""))
