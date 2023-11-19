@@ -4,15 +4,6 @@
 
 This module polls a series of fairly well known but occasionally unreliable 'what is my ip' services. It then produces the most common response that is a valid ipv4 or ipv6 address (both outputs are separately provided).
 
-<<<<<<< HEAD
-=======
-We support two providers - `curl2` and `http`. `curl2` is the default provider because it has better failure handling whereas `http` provider will fail a plan/apply if the endpoint doesn't respond.
-
-## Limitations
-
-Neither the `curl2` nor `http` providers are perfect. The `curl2` provider is slightly more reliable than the `http` provider. We should ideally check DNS prior to polling, or find a provider that won't poll unless dns resolves - or won't fail if it doesn't resolve.
-
->>>>>>> main
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -20,10 +11,7 @@ Neither the `curl2` nor `http` providers are perfect. The `curl2` provider is sl
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
 | <a name="requirement_curl2"></a> [curl2](#requirement\_curl2) | ~> 1.6 |
-<<<<<<< HEAD
 | <a name="requirement_external"></a> [external](#requirement\_external) | ~> 2.3.1 |
-=======
->>>>>>> main
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3 |
 
 ## Providers
@@ -31,10 +19,7 @@ Neither the `curl2` nor `http` providers are perfect. The `curl2` provider is sl
 | Name | Version |
 |------|---------|
 | <a name="provider_curl2"></a> [curl2](#provider\_curl2) | 1.6.1 |
-<<<<<<< HEAD
 | <a name="provider_external"></a> [external](#provider\_external) | 2.3.1 |
-=======
->>>>>>> main
 | <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
 
 ## Modules
@@ -46,10 +31,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [curl2_curl2.myip](https://registry.terraform.io/providers/mehulgohil/curl2/latest/docs/data-sources/curl2) | data source |
-<<<<<<< HEAD
 | [external_external.external_curl](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
-=======
->>>>>>> main
 | [http_http.myip](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
 ## Inputs
