@@ -24,7 +24,6 @@ data "curl2" "myip" {
   for_each    = var.data_provider == "curl2" ? toset(local.service_urls) : []
   uri         = each.key
   http_method = "GET"
-
 }
 
 # but we can use http if you prefer
