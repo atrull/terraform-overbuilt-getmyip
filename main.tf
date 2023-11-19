@@ -60,7 +60,7 @@ locals {
   http_responses          = var.data_provider == "http" ? values(data.http.myip)[*].response_body : []
 
   # build a list of responses
-  service_response_bodies = coalesce(local.external_curl_responses, local.curl2_responses, local.http_responses)
+  service_response_bodies = concat(local.external_curl_responses, local.curl2_responses, local.http_responses)
 
   # remunge it without whitespace as a list of strings
   split_output = split(",", replace(trimspace(join(",", local.service_response_bodies)), "/\\s/", ""))
