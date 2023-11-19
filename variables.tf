@@ -21,8 +21,20 @@ variable "extra_service_urls" {
   description = "Put your own in here if you want extra ones, this gets merged with the `service_urls` list"
 }
 
+variable "request_timeout" {
+  default     = 500
+  type        = number
+  description = "Request timeout in milliseconds"
+}
+
+variable "retry_attempts" {
+  default     = 1
+  type        = number
+  description = "Request retries"
+}
+
 variable "data_provider" {
-  default     = "curl"
+  default     = "curl2"
   type        = string
-  description = "`curl` or `http` providers are both supported - we recommend `curl`"
+  description = "`curl2` or `http` providers are both supported - we recommend `curl2`"
 }
