@@ -28,7 +28,7 @@ variable "request_timeout" {
 }
 
 variable "retry_attempts" {
-  default     = 0
+  default     = 1
   type        = number
   description = "Request retries"
 }

@@ -8,7 +8,7 @@ We support two providers - `curl2` and `http`. `curl2` is the default provider b
 
 ## Limitations
 
-Neither the `curl2` nor `http` providers are perfect. The `curl2` provider is slightly more reliable than the `http` provider.
+Neither the `curl2` nor `http` providers are perfect. The `curl2` provider is slightly more reliable than the `http` provider. We should ideally check DNS prior to polling, or find a provider that won't poll unless dns resolves - or won't fail if it doesn't resolve.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
