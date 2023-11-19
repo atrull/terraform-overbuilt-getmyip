@@ -19,12 +19,26 @@ provider "curl2" {
   }
 }
 
+# dns checks
+data "dns_a_record_set" "myip" {
+  for_each = toset(local.service_urls)
+  host = regex("^(?:(?P<scheme>[^:/?#]+):)?(?://(?P<host>[^/?#]*))?", each.key).host
+  # one day, this will be more reliable when a PR for the DNS provider gets merged in..
+  # https://github.com/hashicorp/terraform-provider-dns/pull/76
+}
+
 # curl2 is the default method
 data "curl2" "myip" {
   for_each    = var.data_provider == "curl2" ? toset(local.service_urls) : []
   uri         = each.key
   http_method = "GET"
-
+  lifecycle {
+    # check dns first
+    precondition {
+      condition     = data.dns_a_record_set.myip[each.key].addrs != null
+      error_message = "dns for a myip service didn't resolve please remove it from the list"
+    }
+  }
 }
 
 # but we can use http if you prefer
