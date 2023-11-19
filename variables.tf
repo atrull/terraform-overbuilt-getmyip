@@ -15,6 +15,18 @@ variable "service_urls" {
   description = "List of urls to use for getting our IP"
 }
 
+variable "request_timeout" {
+  default     = 500
+  type        = number
+  description = "Request timeout in milliseconds"
+}
+
+variable "retry_attempts" {
+  default     = 0
+  type        = number
+  description = "Request retries"
+}
+
 variable "extra_service_urls" {
   default     = []
   type        = list(string)
@@ -22,7 +34,7 @@ variable "extra_service_urls" {
 }
 
 variable "data_provider" {
-  default     = "curl"
+  default     = "curl2"
   type        = string
-  description = "`curl` or `http` providers are both supported - we recommend `curl`"
+  description = "`curl2` or `http` providers are both supported - we recommend `curl2`"
 }
