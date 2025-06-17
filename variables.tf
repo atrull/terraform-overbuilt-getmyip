@@ -1,6 +1,5 @@
 variable "service_urls" {
   default = [
-    "https://api.seeip.org",
     "https://ipinfo.io/ip",
     "https://ifconfig.co",
     "https://icanhazip.com",
