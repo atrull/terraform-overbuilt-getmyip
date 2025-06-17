@@ -19,8 +19,8 @@ This module polls a series of fairly well known but occasionally unreliable 'wha
 | Name | Version |
 |------|---------|
 | <a name="provider_curl2"></a> [curl2](#provider\_curl2) | 1.6.1 |
-| <a name="provider_external"></a> [external](#provider\_external) | 2.3.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
+| <a name="provider_external"></a> [external](#provider\_external) | 2.3.5 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
 
 ## Modules
 
@@ -42,18 +42,18 @@ No modules.
 | <a name="input_extra_service_urls"></a> [extra\_service\_urls](#input\_extra\_service\_urls) | Put your own in here if you want extra ones, this gets merged with the `service_urls` list | `list(string)` | `[]` | no |
 | <a name="input_request_timeout"></a> [request\_timeout](#input\_request\_timeout) | Request timeout in milliseconds | `number` | `500` | no |
 | <a name="input_retry_attempts"></a> [retry\_attempts](#input\_retry\_attempts) | Request retries | `number` | `1` | no |
-| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list(string)` | <pre>[<br/>  "https://api.seeip.org",<br/>  "https://ipinfo.io/ip",<br/>  "https://ifconfig.co",<br/>  "https://icanhazip.com",<br/>  "https://api.ipify.org",<br/>  "https://ifconfig.me",<br/>  "https://ipecho.net/plain",<br/>  "https://ifconfig.io",<br/>  "https://ident.me",<br/>  "https://ipv4.ident.me",<br/>  "https://checkip.amazonaws.com"<br/>]</pre> | no |
+| <a name="input_service_urls"></a> [service\_urls](#input\_service\_urls) | List of urls to use for getting our IP | `list(string)` | <pre>[<br/>  "https://ipinfo.io/ip",<br/>  "https://ifconfig.co",<br/>  "https://icanhazip.com",<br/>  "https://api.ipify.org",<br/>  "https://ifconfig.me",<br/>  "https://ipecho.net/plain",<br/>  "https://ifconfig.io",<br/>  "https://ident.me",<br/>  "https://ipv4.ident.me",<br/>  "https://checkip.amazonaws.com"<br/>]</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_ipv4"></a> [ipv4](#output\_ipv4) | The most common ipv4 response |
-| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | List of all the ipv4 matches (informational/testing) |
-| <a name="output_ipv4_distinct_matches"></a> [ipv4\_distinct\_matches](#output\_ipv4\_distinct\_matches) | List of unique the ipv4 matches |
+| <a name="output_ipv4_all_matches"></a> [ipv4\_all\_matches](#output\_ipv4\_all\_matches) | List of all ipv4 matches (informational/testing) |
+| <a name="output_ipv4_distinct_matches"></a> [ipv4\_distinct\_matches](#output\_ipv4\_distinct\_matches) | List of unique ipv4 matches |
 | <a name="output_ipv6"></a> [ipv6](#output\_ipv6) | The most common ipv6 response |
-| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | List of all the ipv6 matches (informational/testing) |
-| <a name="output_ipv6_distinct_matches"></a> [ipv6\_distinct\_matches](#output\_ipv6\_distinct\_matches) | List of unique the ipv6 matches |
+| <a name="output_ipv6_all_matches"></a> [ipv6\_all\_matches](#output\_ipv6\_all\_matches) | List of all ipv6 matches (informational/testing) |
+| <a name="output_ipv6_distinct_matches"></a> [ipv6\_distinct\_matches](#output\_ipv6\_distinct\_matches) | List of unique ipv6 matches |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Providers and their Limitations : An explanation.

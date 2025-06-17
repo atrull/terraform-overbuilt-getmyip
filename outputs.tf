@@ -10,20 +10,20 @@ output "ipv6" {
 
 output "ipv4_distinct_matches" {
   value       = distinct(local.ipv4_matches)
-  description = "List of unique the ipv4 matches"
+  description = "List of unique ipv4 matches"
 }
 
 output "ipv6_distinct_matches" {
   value       = distinct(local.ipv6_matches)
-  description = "List of unique the ipv6 matches"
+  description = "List of unique ipv6 matches"
 }
 
 output "ipv4_all_matches" {
   value       = local.ipv4_matches
-  description = "List of all the ipv4 matches (informational/testing)"
+  description = "List of all ipv4 matches (informational/testing)"
 }
 
 output "ipv6_all_matches" {
   value       = local.ipv6_matches
-  description = "List of all the ipv6 matches (informational/testing)"
+  description = "List of all ipv6 matches (informational/testing)"
 }
