@@ -4,6 +4,8 @@
 
 This module polls a series of fairly well known but occasionally unreliable 'what is my ip' services. It then produces the most common response that is a valid ipv4 or ipv6 address (both outputs are separately provided).
 
+Especially useful if you have connection hashing - the distinct matches outputs will provide a list of your current public source addresses.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
