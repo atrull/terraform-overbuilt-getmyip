@@ -10,6 +10,7 @@ variable "service_urls" {
     "https://ifconfig.io",
     "https://ident.me",
     "https://ipv4.ident.me",
+    "https://checkip.amazonaws.com",
   ]
   type        = list(string)
   description = "List of urls to use for getting our IP"
