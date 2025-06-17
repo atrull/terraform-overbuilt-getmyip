@@ -8,6 +8,16 @@ output "ipv6" {
   description = "The most common ipv6 response"
 }
 
+output "ipv4_distinct_matches" {
+  value       = distinct(local.ipv4_matches)
+  description = "List of unique the ipv4 matches"
+}
+
+output "ipv6_distinct_matches" {
+  value       = distinct(local.ipv6_matches)
+  description = "List of unique the ipv6 matches"
+}
+
 output "ipv4_all_matches" {
   value       = local.ipv4_matches
   description = "List of all the ipv4 matches (informational/testing)"
