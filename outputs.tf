@@ -1,10 +1,10 @@
 output "ipv4" {
-  value       = join("", local.ipv4_most_common_response)
+  value       = try(distinct(local.ipv4_most_common_response)[0], "")
   description = "The most common ipv4 response"
 }
 
 output "ipv6" {
-  value       = join("", local.ipv6_most_common_response)
+  value       = try(distinct(local.ipv6_most_common_response)[0], "")
   description = "The most common ipv6 response"
 }
 
