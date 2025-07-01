@@ -75,17 +75,25 @@ locals {
     if can(cidrhost("${cidr}/128", 0))
   ]
 
-  # what follows is a really long winded version of uniq -c | sort -n
-  ipv4_index_list           = [for index, item in local.ipv4_matches : length([for i in slice(local.ipv4_matches, 0, index + 1) : i if i == item])]
-  ipv4_joined_index         = zipmap(local.ipv4_matches, local.ipv4_index_list)
-  ipv4_reverse_index        = { for k, v in local.ipv4_joined_index : v => k... }
-  ipv4_most_common_response = local.ipv4_reverse_index != {} ? local.ipv4_reverse_index[element(sort(keys(local.ipv4_reverse_index)), length(local.ipv4_reverse_index) - 1)] : []
+  # simplified frequency counting - find the most common IP address
+  ipv4_frequency_map = {
+    for ip in distinct(local.ipv4_matches) :
+    ip => length([for match in local.ipv4_matches : match if match == ip])
+  }
+  ipv4_max_count = length(local.ipv4_frequency_map) > 0 ? max(values(local.ipv4_frequency_map)...) : 0
+  ipv4_most_common_response = [
+    for ip, count in local.ipv4_frequency_map : ip if count == local.ipv4_max_count
+  ]
 
-  # uniq -c | sort -n again but for ipv6
-  ipv6_index_list           = [for index, item in local.ipv6_matches : length([for i in slice(local.ipv6_matches, 0, index + 1) : i if i == item])]
-  ipv6_joined_index         = zipmap(local.ipv6_matches, local.ipv6_index_list)
-  ipv6_reverse_index        = { for k, v in local.ipv6_joined_index : v => k... }
-  ipv6_most_common_response = local.ipv6_reverse_index != {} ? local.ipv6_reverse_index[element(sort(keys(local.ipv6_reverse_index)), length(local.ipv6_reverse_index) - 1)] : []
+  # same for ipv6
+  ipv6_frequency_map = {
+    for ip in distinct(local.ipv6_matches) :
+    ip => length([for match in local.ipv6_matches : match if match == ip])
+  }
+  ipv6_max_count = length(local.ipv6_frequency_map) > 0 ? max(values(local.ipv6_frequency_map)...) : 0
+  ipv6_most_common_response = [
+    for ip, count in local.ipv6_frequency_map : ip if count == local.ipv6_max_count
+  ]
 
 }
 
