@@ -1,6 +1,6 @@
 # Example: Using with AWS security group to allow your current IP
 module "my_ip" {
-  source  = "atrull/getmyip/overbuilt"
+  source = "atrull/getmyip/overbuilt"
 }
 
 resource "aws_security_group" "allow_my_ip" {

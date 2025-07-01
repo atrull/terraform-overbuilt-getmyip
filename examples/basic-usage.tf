@@ -1,6 +1,6 @@
 # Basic usage example
 module "my_ip" {
-  source  = "atrull/getmyip/overbuilt"
+  source = "atrull/getmyip/overbuilt"
 }
 
 output "my_public_ip" {

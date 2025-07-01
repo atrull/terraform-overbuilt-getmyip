@@ -1,9 +1,9 @@
 # Example with custom settings
 module "my_ip_custom" {
-  source  = "atrull/getmyip/overbuilt"
+  source = "atrull/getmyip/overbuilt"
 
   # Use faster timeout for quick builds
-  request_timeout = 2000  # 2 seconds
+  request_timeout = 2000 # 2 seconds
   retry_attempts  = 3
 
   # Add your own preferred services
