@@ -47,7 +47,7 @@ run "http_provider_gets_valid_ipv4" {
   command = plan
 
   variables {
-    data_provider   = "http"
+    data_provider = "http"
     # the http provider fails hard on dead endpoints, so use a small
     # IPv4-only list and a generous timeout
     service_urls    = ["https://icanhazip.com", "https://api.ipify.org", "https://checkip.amazonaws.com"]

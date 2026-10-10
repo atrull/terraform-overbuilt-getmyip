@@ -2,23 +2,25 @@ variable "service_urls" {
   default = [
     # IPv4/general services
     "https://ipinfo.io/ip",
-    "https://ifconfig.co",
+    "https://ifconfig.co/ip",
     "https://icanhazip.com",
     "https://api.ipify.org",
-    "https://ifconfig.me",
+    "https://ifconfig.me/ip",
     "https://ipecho.net/plain",
-    "https://ifconfig.io",
+    "https://ifconfig.io/ip",
     "https://ident.me",
     "https://checkip.amazonaws.com",
-    "https://httpbin.org/ip",
     "https://myexternalip.com/raw",
     "https://wtfismyip.com/text",
-    "https://ip.seeip.org",
     "https://curlmyip.net",
     "https://ipv4.icanhazip.com",
     # IPv6-specific services (will work in IPv6-enabled environments)
+    "https://api6.ipify.org",
+    "https://api64.ipify.org",
     "https://ipv6.icanhazip.com",
     "https://ipv6.ident.me",
+    "https://ipv6.myexternalip.com/raw",
+    "https://ipv6.wtfismyip.com/text",
     "https://v6.ident.me",
   ]
   type        = list(string)
