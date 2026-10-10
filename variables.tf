@@ -54,9 +54,9 @@ variable "retry_attempts" {
 variable "data_provider" {
   default     = "external_curl"
   type        = string
-  description = "`curl2` or `http` providers are also supported - we recommend `external_curl` because it handles failure better"
+  description = "`http` provider is also supported - we recommend `external_curl` because it handles failure better"
   validation {
-    condition     = contains(["external_curl", "curl2", "http"], var.data_provider)
-    error_message = "Data provider must be one of: external_curl, curl2, http."
+    condition     = contains(["external_curl", "http"], var.data_provider)
+    error_message = "Data provider must be one of: external_curl, http."
   }
 }

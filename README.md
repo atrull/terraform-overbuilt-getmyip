@@ -12,7 +12,6 @@ Especially useful if you have connection hashing - the distinct matches outputs 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_curl2"></a> [curl2](#requirement\_curl2) | ~> 1.6 |
 | <a name="requirement_external"></a> [external](#requirement\_external) | ~> 2.3.1 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3 |
 
@@ -20,7 +19,6 @@ Especially useful if you have connection hashing - the distinct matches outputs 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_curl2"></a> [curl2](#provider\_curl2) | 1.6.1 |
 | <a name="provider_external"></a> [external](#provider\_external) | 2.3.5 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
 
@@ -32,7 +30,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [curl2_curl2.myip](https://registry.terraform.io/providers/mehulgohil/curl2/latest/docs/data-sources/curl2) | data source |
 | [external_external.external_curl](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [http_http.myip](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
@@ -40,7 +37,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_data_provider"></a> [data\_provider](#input\_data\_provider) | `curl2` or `http` providers are also supported - we recommend `external_curl` because it handles failure better | `string` | `"external_curl"` | no |
+| <a name="input_data_provider"></a> [data\_provider](#input\_data\_provider) | `http` provider is also supported - we recommend `external_curl` because it handles failure better | `string` | `"external_curl"` | no |
 | <a name="input_extra_service_urls"></a> [extra\_service\_urls](#input\_extra\_service\_urls) | Put your own in here if you want extra ones, this gets merged with the `service_urls` list | `list(string)` | `[]` | no |
 | <a name="input_request_timeout"></a> [request\_timeout](#input\_request\_timeout) | Request timeout in milliseconds | `number` | `500` | no |
 | <a name="input_retry_attempts"></a> [retry\_attempts](#input\_retry\_attempts) | Request retries | `number` | `1` | no |
@@ -65,9 +62,9 @@ No modules.
 
 The goal of this module is to provide a valid-enough answer even when the internet does what the internet does, which is to be flaky and broken somewhere, sometime.
 
-Neither the `curl2` nor `http` providers are perfectly suited to the internet since they will fail a run if the url doesn't respond and/or the url doesn't resolve. The `curl2` provider is slightly more reliable than the `http` provider. This failure mode makes sense if it's a critical part of your terraform..
+The `http` provider is not perfectly suited to the internet since it will fail a run if the url doesn't respond and/or the url doesn't resolve. This failure mode makes sense if it's a critical part of your terraform..
 
-Both of `curl2` and `http` providers are provided as a matter of them being possibly better in the future if/when they have some `ignore_failure` options.
+The `http` provider is provided as a matter of it being possibly better in the future if/when it has some `ignore_failure` options.
 
 Since we're aggregating results to achieve a 'most common' response it frankly shouldn't matter if one of the endpoints in the list fails to respond - we will have gathered enough data to make a good response. Let the build roll on!
 

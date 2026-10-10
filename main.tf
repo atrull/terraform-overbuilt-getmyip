@@ -5,21 +5,10 @@ terraform {
       version = "~> 2.3.1"
       source  = "hashicorp/external"
     }
-    curl2 = {
-      version = "~> 1.6"
-      source  = "mehulgohil/curl2"
-    }
     http = {
       version = "~> 3"
       source  = "hashicorp/http"
     }
-  }
-}
-
-provider "curl2" {
-  timeout_ms = var.request_timeout
-  retry {
-    retry_attempts = var.retry_attempts
   }
 }
 
@@ -30,13 +19,6 @@ data "external" "external_curl" {
   query = {
     id = ""
   }
-}
-
-# curl2 is the default method
-data "curl2" "myip" {
-  for_each    = var.data_provider == "curl2" ? toset(local.service_urls) : []
-  uri         = each.key
-  http_method = "GET"
 }
 
 # but we can use http if you prefer
@@ -56,11 +38,10 @@ locals {
 
   # pick whichever responses we based on the chosen data_provider option
   external_curl_responses = var.data_provider == "external_curl" ? values(data.external.external_curl)[*].result.body : []
-  curl2_responses         = var.data_provider == "curl2" ? values(data.curl2.myip)[*].response.body : []
   http_responses          = var.data_provider == "http" ? values(data.http.myip)[*].response_body : []
 
   # build a list of responses
-  service_response_bodies = concat(local.external_curl_responses, local.curl2_responses, local.http_responses)
+  service_response_bodies = concat(local.external_curl_responses, local.http_responses)
 
   # remunge it without whitespace as a list of strings
   split_output = split(",", replace(trimspace(join(",", local.service_response_bodies)), "/\\s/", ""))

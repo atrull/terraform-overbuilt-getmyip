@@ -18,8 +18,9 @@ if ! [[ "$RETRY_ATTEMPTS" =~ ^[0-9]+$ ]] || [ "$RETRY_ATTEMPTS" -lt 0 ]; then
     RETRY_ATTEMPTS=1
 fi
 
-# Validate timeout (must be numeric and > 0)
-if ! [[ "$TIMEOUT_SEC" =~ ^[0-9]+$ ]] || [ "$TIMEOUT_SEC" -le 0 ]; then
+# Validate timeout (must be numeric, fractional seconds allowed, and > 0)
+# done in awk to stay portable across sh implementations
+if ! awk -v t="$TIMEOUT_SEC" 'BEGIN{exit !(t ~ /^[0-9]+(\.[0-9]+)?$/ && t > 0)}'; then
     TIMEOUT_SEC=5
 fi
 
@@ -27,7 +28,7 @@ fi
 BODY=$(curl -s \
     --retry "$RETRY_ATTEMPTS" \
     --connect-timeout "$TIMEOUT_SEC" \
-    --max-time "$((TIMEOUT_SEC + 5))" \
+    --max-time "$(awk -v t="$TIMEOUT_SEC" 'BEGIN{print t + 5}')" \
     --fail \
     --location \
     --user-agent "overbuilt-getmyip/1.0" \
